@@ -86,14 +86,22 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Giz-oy-vud">
+                                <rect key="frame" x="20" y="271" width="353" height="535"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Giz-oy-vud" secondAttribute="trailing" constant="20" id="2Rk-Uh-hTf"/>
                             <constraint firstItem="HY4-vp-LUb" firstAttribute="leading" secondItem="Vdk-Za-6Zx" secondAttribute="trailing" constant="12" id="8wy-Yg-CM2"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Giz-oy-vud" secondAttribute="bottom" constant="12" id="AHn-Iy-NY6"/>
+                            <constraint firstItem="Giz-oy-vud" firstAttribute="top" secondItem="CCq-dX-Egk" secondAttribute="bottom" constant="12" id="Aet-zO-jCb"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Mkj-De-5bd" secondAttribute="trailing" constant="20" id="MJ0-IZ-Bf5"/>
                             <constraint firstItem="Mkj-De-5bd" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="16" id="NJP-di-Xf9"/>
                             <constraint firstItem="CCq-dX-Egk" firstAttribute="top" secondItem="Mkj-De-5bd" secondAttribute="bottom" constant="24" id="O5s-3x-kxz"/>
+                            <constraint firstItem="Giz-oy-vud" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="YWx-C3-kzr"/>
                             <constraint firstItem="HY4-vp-LUb" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="24" id="bZE-kw-6ye"/>
                             <constraint firstItem="CCq-dX-Egk" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="qtD-gG-y7Z"/>
                             <constraint firstItem="Vdk-Za-6Zx" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="rjA-IM-ZqV"/>
@@ -105,6 +113,7 @@
                     <connections>
                         <outlet property="dataCollectionView" destination="CCq-dX-Egk" id="U7c-v2-t76"/>
                         <outlet property="profileImageView" destination="Vdk-Za-6Zx" id="E0W-7e-UVh"/>
+                        <outlet property="taskTableView" destination="Giz-oy-vud" id="qDg-8e-k7I"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

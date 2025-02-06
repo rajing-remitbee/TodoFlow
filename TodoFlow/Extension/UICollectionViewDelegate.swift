@@ -9,6 +9,7 @@ import UIKit
 
 extension MainViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        //Selected Date
         let selectedDate = dates[indexPath.row]
         
         // Find the section index for the selected date

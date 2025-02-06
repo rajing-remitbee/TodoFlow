@@ -15,12 +15,10 @@ class MainViewController: UIViewController {
     @IBOutlet var profileImageView: UIImageView! //ProfileImageView Component
     @IBOutlet var dataCollectionView: UICollectionView! //CollectionView Component
     @IBOutlet var taskTableView: UITableView! //TableView Component
+    @IBOutlet var bottomView: UIView! //BottomView Component
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        //Register Table View
-        taskTableView.register(UITableViewCell.self, forCellReuseIdentifier: "TaskCell")
         
         //ProfileView - Corner Radius
         profileImageView.clipsToBounds = true
@@ -37,6 +35,12 @@ class MainViewController: UIViewController {
         generateDates()
         
         generateTasks()
+        
+        //Border for bottom view
+        let topBorder = CALayer()
+        topBorder.frame = CGRect(x: 0, y: 0, width: bottomView.frame.width, height: 1)
+        topBorder.backgroundColor = UIColor.lightGray.cgColor
+        bottomView.layer.addSublayer(topBorder)
         
         // Scroll to today's date
         let todayIndex = dates.firstIndex { Calendar.current.isDate($0, inSameDayAs: Date()) } ?? 0
@@ -63,13 +67,16 @@ class MainViewController: UIViewController {
         let calendar = Calendar.current //Current Calendar
         let today = Date() //Today's Date
         
+        let workCategory = TaskCategoryModel(name: "Work", color: UIColor.blue)
+        let personalCategory = TaskCategoryModel(name: "Personal", color: UIColor.red)
+        
         //Sample tasks
         let tasks = [
-            TaskModel(title: "Buy groceries", date: today),
-            TaskModel(title: "Call John", date: today),
-            TaskModel(title: "Finish report", date: calendar.date(byAdding: .day, value: 1, to: today)!),
-            TaskModel(title: "Gym workout", date: calendar.date(byAdding: .day, value: -1, to: today)!),
-            TaskModel(title: "Read a book", date: calendar.date(byAdding: .day, value: 2, to: today)!),
+            TaskModel(title: "Buy groceries", date: today, category: personalCategory),
+            TaskModel(title: "Call John", date: today, category: personalCategory),
+            TaskModel(title: "Finish report", date: calendar.date(byAdding: .day, value: 1, to: today)!, category: workCategory),
+            TaskModel(title: "Gym workout", date: calendar.date(byAdding: .day, value: -1, to: today)!, category: personalCategory),
+            TaskModel(title: "Read a book", date: calendar.date(byAdding: .day, value: 2, to: today)!, category: personalCategory),
         ]
         // Group tasks by date
         let groupedTasks = Dictionary(grouping: tasks) { task in

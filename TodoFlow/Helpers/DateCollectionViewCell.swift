@@ -11,13 +11,28 @@ class DateCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet var dayLabel: UILabel! //Day Label
     @IBOutlet var dateLabel: UILabel! //Date Label
+    //Indicator for today's date
+    private let indicatorView = UIView()
 
     //Prepare for displaying
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.layer.cornerRadius = 8 //Corner Radius
-        self.layer.borderWidth = 1 //Border Width
-        self.layer.borderColor = UIColor.lightGray.cgColor //Border Color
+        
+        // Setup the indicator view
+        indicatorView.backgroundColor = UIColor(hex: "#00A86B") // Custom green color
+        indicatorView.translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(indicatorView)
+        
+        // Set constraints to position the indicator at the bottom center
+        NSLayoutConstraint.activate([
+            indicatorView.bottomAnchor.constraint(equalTo: self.bottomAnchor),  // Attach to bottom
+            indicatorView.leadingAnchor.constraint(equalTo: self.leadingAnchor),  // Attach to left
+            indicatorView.trailingAnchor.constraint(equalTo: self.trailingAnchor),  // Attach to right
+            indicatorView.heightAnchor.constraint(equalToConstant: 4)  // Height of the line
+        ])
+        
+        //Hide indicator initially
+        indicatorView.isHidden = true
     }
     
     func configure(with date: Date, isToday: Bool, isPast: Bool) {
@@ -31,21 +46,21 @@ class DateCollectionViewCell: UICollectionViewCell {
         dayLabel.text = dateFormatter.string(from: date)
         
         if isToday {
-            //If date is Today, Show in green color
-            dayLabel.textColor = .green
-            dateLabel.textColor = .green
+            //Check for Today
+            let todayColor = UIColor(hex: "#00A86B")
+            dayLabel.textColor = todayColor
+            dateLabel.textColor = todayColor
+            indicatorView.isHidden = false
         } else if isPast {
-            //If date is past, Show in grey color
-            dayLabel.textColor = .gray
-            dateLabel.textColor = .gray
+            //Check for past date
+            dayLabel.textColor = UIColor(hex: "#C0C3C9")
+            dateLabel.textColor = UIColor(hex: "#C0C3C9")
+            indicatorView.isHidden = true
         } else {
-            //If date is upcoming, Show in black color
-            dayLabel.textColor = .black
-            dateLabel.textColor = .black
+            //Upcoming date
+            dayLabel.textColor = UIColor(hex: "#0E100F")
+            dateLabel.textColor = UIColor(hex: "#0E100F")
+            indicatorView.isHidden = true
         }
-        
     }
-    
-    
-    
 }

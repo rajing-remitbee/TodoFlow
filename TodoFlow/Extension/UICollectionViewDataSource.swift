@@ -29,7 +29,6 @@ extension MainViewController: UICollectionViewDataSource {
         let isPast = date < today && !isToday
         //Set data inside cell
         cell.configure(with: date, isToday: isToday, isPast: isPast)
-        
         return cell
     }
     

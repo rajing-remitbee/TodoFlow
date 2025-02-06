@@ -10,4 +10,5 @@ import Foundation
 struct TaskModel {
     let title: String
     let date: Date
+    let category: TaskCategoryModel
 }

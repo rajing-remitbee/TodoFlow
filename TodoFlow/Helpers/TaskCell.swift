@@ -10,38 +10,37 @@ import UIKit
 class TaskCell: UITableViewCell {
     
     @IBOutlet var checkBox: UIButton! //Checkbox
-    @IBOutlet var taskLabel: UILabel! //Task Label
+    @IBOutlet var taskLabel: UILabel! //TaskLabel
+    @IBOutlet var categoryBox: UILabel! //Category Box
     @IBOutlet var categoryLabel: UILabel! //Category Label
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
+        //Initially unchecked
+        checkBox?.isSelected = false
         
         //Image for checkbox
-        checkBox.setImage(UIImage(systemName: "square"), for: .normal)
-        checkBox.setImage(UIImage(systemName: "checkmark.square.fill"), for: .selected)
+        checkBox?.setImage(UIImage(systemName: "square"), for: .normal)
+        checkBox?.setImage(UIImage(systemName: "checkmark.square.fill"), for: .selected)
+        checkBox?.tintColor = UIColor(hex: "#F4F6F6")
         
-        //Format category label
-        categoryLabel.layer.borderWidth = 1
-        categoryLabel.layer.cornerRadius = 6
-        categoryLabel.clipsToBounds = true
+        //Format category box
+        categoryBox?.layer.borderWidth = 1
+        categoryBox?.layer.cornerRadius = 6
+        categoryBox?.clipsToBounds = true
     }
     
     func configure(with task: TaskModel) {
         //Configure task and category label
         taskLabel.text = task.title
         categoryLabel.text = "  \(task.category.name)  "
-        categoryLabel.textColor = task.category.color
-        categoryLabel.layer.borderColor = task.category.color.cgColor
+        categoryBox.layer.borderColor = task.category.color.cgColor
     }
         
     @IBAction func checkBoxTapped(_ sender: UIButton) {
-        sender.isSelected.toggle() // Toggle check
+        sender.isSelected.toggle() // Toggle checkbox state
+        // Change tint color dynamically
+        sender.tintColor = sender.isSelected ? UIColor(hex: "#00A86B") : UIColor(hex: "#F4F6F6")
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-        // Configure the view for the selected state
-    }
-
 }

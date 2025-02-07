@@ -47,6 +47,18 @@ class MainViewController: UIViewController {
         dataCollectionView.scrollToItem(at: IndexPath(item: todayIndex, section: 0), at: .centeredHorizontally, animated: false)
     }
     
+    @IBAction func addButtonTapped(_ sender: UIButton) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        if let bottomSheetVC = storyboard.instantiateViewController(withIdentifier: "BottomSheetViewController") as? BottomSheetViewController {
+                
+            // Present as overlay
+            bottomSheetVC.modalPresentationStyle = .overCurrentContext
+            bottomSheetVC.modalTransitionStyle = .crossDissolve
+
+            self.present(bottomSheetVC, animated: true, completion: nil)
+        }
+    }
+    
     private func generateDates() {
         //Calendar Object
         let calendar = Calendar.current

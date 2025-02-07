@@ -159,6 +159,9 @@
                                         </constraints>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" image="Add.png"/>
+                                        <connections>
+                                            <action selector="addButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="yAD-ex-7le"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -209,6 +212,96 @@
             </objects>
             <point key="canvasLocation" x="976.33587786259534" y="-27.464788732394368"/>
         </scene>
+        <!--Bottom Sheet View Controller-->
+        <scene sceneID="Ajq-vs-zeV">
+            <objects>
+                <viewController storyboardIdentifier="BottomSheetViewController" modalPresentationStyle="overCurrentContext" id="bMy-kW-F4p" customClass="BottomSheetViewController" customModule="TodoFlow" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="LMY-DR-HhG">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QXA-1W-60S">
+                                <rect key="frame" x="0.0" y="59" width="393" height="759"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nSq-Iv-UOi">
+                                        <rect key="frame" x="0.0" y="459" width="393" height="300"/>
+                                        <subviews>
+                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Write your task" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YTv-sn-Sgy">
+                                                <rect key="frame" x="16" y="24" width="361" height="48"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="48" id="n3U-08-30c"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eRh-52-1Jy">
+                                                <rect key="frame" x="16" y="93" width="120" height="34"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="tintColor" red="0.49411764705882355" green="0.51764705882352935" blue="0.56862745098039214" alpha="0.5" colorSpace="custom" customColorSpace="displayP3"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="gray" image="Calendar.png" imagePlacement="leading" title="Today" imagePadding="8" titleAlignment="leading">
+                                                    <fontDescription key="titleFontDescription" type="system" pointSize="12"/>
+                                                </buttonConfiguration>
+                                                <connections>
+                                                    <action selector="calendarButtonTapped:" destination="bMy-kW-F4p" eventType="touchUpInside" id="bd2-YX-HNz"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5YG-BE-oqR">
+                                                <rect key="frame" x="152" y="93" width="120" height="34"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="tintColor" red="0.4941176471" green="0.51764705879999995" blue="0.56862745100000001" alpha="0.5" colorSpace="custom" customColorSpace="displayP3"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="gray" image="Box.png" imagePlacement="leading" title="No List" imagePadding="8" titleAlignment="leading">
+                                                    <fontDescription key="titleFontDescription" type="system" pointSize="12"/>
+                                                </buttonConfiguration>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uko-o5-6ad">
+                                                <rect key="frame" x="313" y="83" width="64" height="54"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" image="Submit.png"/>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="YTv-sn-Sgy" firstAttribute="top" secondItem="nSq-Iv-UOi" secondAttribute="top" constant="24" id="jG1-lJ-kcc"/>
+                                            <constraint firstAttribute="height" constant="300" id="lDQ-ih-jHG" userLabel="height &gt;= 300"/>
+                                            <constraint firstItem="YTv-sn-Sgy" firstAttribute="leading" secondItem="nSq-Iv-UOi" secondAttribute="leading" constant="16" id="wuu-Eo-LYq"/>
+                                            <constraint firstAttribute="trailing" secondItem="YTv-sn-Sgy" secondAttribute="trailing" constant="16" id="xt6-Hj-UJx"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="custom" customColorSpace="displayP3"/>
+                                <gestureRecognizers/>
+                                <constraints>
+                                    <constraint firstItem="nSq-Iv-UOi" firstAttribute="leading" secondItem="QXA-1W-60S" secondAttribute="leading" id="60l-PJ-4Ur"/>
+                                    <constraint firstAttribute="bottom" secondItem="nSq-Iv-UOi" secondAttribute="bottom" id="8KC-wG-KnE"/>
+                                    <constraint firstAttribute="trailing" secondItem="nSq-Iv-UOi" secondAttribute="trailing" id="BGk-zg-UYs"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="zyD-0S-9Kn"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="zyD-0S-9Kn" firstAttribute="bottom" secondItem="QXA-1W-60S" secondAttribute="bottom" id="FIJ-XF-Nam"/>
+                            <constraint firstItem="QXA-1W-60S" firstAttribute="leading" secondItem="zyD-0S-9Kn" secondAttribute="leading" id="WtF-IM-hMI"/>
+                            <constraint firstItem="zyD-0S-9Kn" firstAttribute="trailing" secondItem="QXA-1W-60S" secondAttribute="trailing" id="hAV-XR-whf"/>
+                            <constraint firstItem="zyD-0S-9Kn" firstAttribute="bottom" secondItem="nSq-Iv-UOi" secondAttribute="bottom" id="pVH-YE-sFs"/>
+                            <constraint firstItem="QXA-1W-60S" firstAttribute="top" secondItem="zyD-0S-9Kn" secondAttribute="top" id="x6a-uy-wKG"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="bottomSheetView" destination="nSq-Iv-UOi" id="ItJ-jZ-b7e"/>
+                        <outlet property="btnCalendar" destination="eRh-52-1Jy" id="qw0-8a-Hi9"/>
+                        <outlet property="btnCategory" destination="5YG-BE-oqR" id="JG8-xT-kdP"/>
+                        <outlet property="btnSubmit" destination="Uko-o5-6ad" id="nZ1-st-sv9"/>
+                        <outlet property="taskInput" destination="YTv-sn-Sgy" id="cV1-So-jZm"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Nst-q0-0bX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1861.8320610687022" y="-27.464788732394368"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="cYi-EV-aOr">
             <objects>
@@ -230,10 +323,13 @@
     </scenes>
     <resources>
         <image name="Add.png" width="56" height="56"/>
+        <image name="Box.png" width="16" height="16"/>
+        <image name="Calendar.png" width="20" height="20"/>
         <image name="Menu.png" width="48" height="48"/>
         <image name="Notification.png" width="48" height="48"/>
         <image name="Profile.jpg" width="1200" height="1200"/>
         <image name="Search.png" width="48" height="48"/>
+        <image name="Submit.png" width="40" height="40"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

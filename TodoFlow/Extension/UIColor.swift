@@ -23,4 +23,12 @@ extension UIColor {
 
         self.init(red: red, green: green, blue: blue, alpha: 1.0)
     }
+    
+    func toHex() -> String {
+        guard let components = cgColor.components else { return "#000000" }
+        let r = Int(components[0] * 255)
+        let g = Int(components[1] * 255)
+        let b = Int(components[2] * 255)
+        return String(format: "#%02X%02X%02X", r, g, b)
+    }
 }

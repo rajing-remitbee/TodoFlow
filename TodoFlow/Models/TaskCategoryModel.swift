@@ -7,7 +7,16 @@
 
 import UIKit
 
-struct TaskCategoryModel {
+struct TaskCategoryModel: Codable {
     let name: String
-    let color: UIColor
+    let colorHex: String
+    
+    var color: UIColor {
+        return UIColor(hex: colorHex)
+    }
+    
+    init(name: String, colorHex: String) {
+        self.name = name
+        self.colorHex = colorHex
+    }
 }

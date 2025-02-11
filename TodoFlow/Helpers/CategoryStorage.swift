@@ -38,7 +38,7 @@ class CategoryStorage {
     //Add Single Category
     func addCategory(name: String, color: UIColor) {
         var categories = getCategories() //Fetch Categories
-        let newCategory = TaskCategoryModel(name: name, colorHex: color.toHex()) //Create new category
+        let newCategory = TaskCategoryModel(name: name, colorHex: color.toHex(), isEditing: false) //Create new category
         categories.append(newCategory) //Append category
         saveCategories(categories) //Write to UserDefaults
     }

@@ -92,8 +92,8 @@ class MainViewController: UIViewController {
         let calendar = Calendar.current //Current Calendar
         let today = Date() //Today's Date
         
-        let workCategory = TaskCategoryModel(name: "Work", colorHex: "#F44336")
-        let personalCategory = TaskCategoryModel(name: "Personal", colorHex: "#2196F3")
+        let workCategory = TaskCategoryModel(name: "Work", colorHex: "#F44336", isEditing: false)
+        let personalCategory = TaskCategoryModel(name: "Personal", colorHex: "#2196F3", isEditing: false)
         
         //Sample tasks
         let tasks = [

@@ -8,15 +8,17 @@
 import UIKit
 
 struct TaskCategoryModel: Codable {
-    let name: String
-    let colorHex: String
+    var name: String
+    var colorHex: String
+    var isEditing: Bool
     
     var color: UIColor {
         return UIColor(hex: colorHex)
     }
     
-    init(name: String, colorHex: String) {
+    init(name: String, colorHex: String, isEditing: Bool = false) {
         self.name = name
         self.colorHex = colorHex
+        self.isEditing = isEditing
     }
 }

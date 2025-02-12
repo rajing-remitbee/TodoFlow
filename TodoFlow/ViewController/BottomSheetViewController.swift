@@ -14,6 +14,9 @@ class BottomSheetViewController: UIViewController {
     @IBOutlet var btnCalendar: UIButton! //Calendar Button
     @IBOutlet var btnCategory: UIButton! //Category Button
     @IBOutlet var btnSubmit: UIButton! //Submit Button
+    @IBOutlet var bottomDragHandle: UIView! //Bottom Drag Handle
+    
+    private var initialBottomSheetY: CGFloat = 0 //Initial BottomSheet Height
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,6 +26,7 @@ class BottomSheetViewController: UIViewController {
         
         setUpBottomSheet()
         setupKeyboardObservers()
+        addPanGesture()
     }
     
     private func showDatePicker() {
@@ -73,12 +77,46 @@ class BottomSheetViewController: UIViewController {
         showDatePicker()
     }
     
+    @IBAction func categoryButtonTapped(_ sender: UIButton) {
+        showCategoryPicker()
+    }
+    
+    private func showCategoryPicker() {
+        let categories = CategoryStorage.shared.getCategories()
+        
+        let alert = UIAlertController(title: "Choose Category", message: nil, preferredStyle: .actionSheet)
+        
+        for category in categories {
+            let action = UIAlertAction(title: category.name, style: .default) { _ in
+                self.updateCategoryChip(with: category)
+            }
+            
+            // Add color preview
+            let colorView = UIView(frame: CGRect(x: 10, y: 8, width: 20, height: 20))
+            colorView.backgroundColor = UIColor(hex: category.colorHex)
+            colorView.layer.cornerRadius = 10
+            action.setValue(colorView, forKey: "image")
+            
+            alert.addAction(action)
+        }
+
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        present(alert, animated: true)
+    }
+    
+    private func updateCategoryChip(with category: TaskCategoryModel) {
+        btnCategory.setTitle(category.name, for: .normal)
+    }
+    
     private func setUpBottomSheet() {
         //Corner Radius
         bottomSheetView.layer.cornerRadius = 16
         //Radius only on top
         bottomSheetView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         bottomSheetView.layer.masksToBounds = true
+        
+        //Drag-Handle Radius
+        bottomDragHandle.layer.cornerRadius = 2
 
         // Move bottom sheet off-screen initially
         self.bottomSheetView.transform = CGAffineTransform(translationX: 0, y: self.view.frame.height)
@@ -110,6 +148,56 @@ class BottomSheetViewController: UIViewController {
     @objc private func keyboardWillHide(_ notification: Notification) {
         UIView.animate(withDuration: 0.3) {
             self.bottomSheetView.transform = .identity
+        }
+    }
+    
+    //Add Pan Gesture
+    private func addPanGesture() {
+        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture(_:))) //Setup PanGesture
+        bottomSheetView.addGestureRecognizer(panGesture) //Add PanGesture to BottomSheet
+    }
+    
+    //Handle Pan Gesture
+    @objc private func handlePanGesture(_ gesture: UIPanGestureRecognizer) {
+        //BottomSheet XY Translation
+        let translation = gesture.translation(in: view)
+        
+        switch gesture.state {
+            //Initial BottomSheet State
+        case .began:
+            initialBottomSheetY = bottomSheetView.frame.origin.y
+            //Changed BottomSheet State
+        case .changed:
+            let newY = initialBottomSheetY + translation.y
+            if newY >= initialBottomSheetY {
+                // Prevent moving up beyond original position
+                bottomSheetView.frame.origin.y = newY
+            }
+            //Final BottomSheet State
+        case .ended:
+            //Gesture Velocity
+            let velocity = gesture.velocity(in: view)
+            if velocity.y > 500 {
+                // If swipe down fast, dismiss
+                dismissBottomSheet()
+            } else {
+                // Snap back to original position if not swiped hard enough
+                UIView.animate(withDuration: 0.3) {
+                    self.bottomSheetView.transform = .identity
+                }
+            }
+        default:
+            break
+        }
+    }
+    
+    //Dismiss the Bottom Sheet
+    private func dismissBottomSheet() {
+        //Dismiss Animation
+        UIView.animate(withDuration: 0.3, animations: {
+            self.bottomSheetView.transform = CGAffineTransform(translationX: 0, y: self.view.frame.height)
+        }) { _ in
+            self.dismiss(animated: false, completion: nil)
         }
     }
     

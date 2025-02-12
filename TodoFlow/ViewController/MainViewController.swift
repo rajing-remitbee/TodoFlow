@@ -47,6 +47,31 @@ class MainViewController: UIViewController {
         dataCollectionView.scrollToItem(at: IndexPath(item: todayIndex, section: 0), at: .centeredHorizontally, animated: false)
     }
     
+    //Menu Button Tapped
+    @IBAction func menuButtonTapped(_ sender: UIButton) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        if let bottomSheetVC = storyboard.instantiateViewController(withIdentifier: "BottomSheetMenuViewController") as? BottomSheetMenuViewController {
+                // Set modal presentation style
+                bottomSheetVC.modalPresentationStyle = .overCurrentContext
+                bottomSheetVC.modalTransitionStyle = .crossDissolve
+                
+                // Present the bottom sheet
+                self.present(bottomSheetVC, animated: true, completion: nil)
+            }
+    }
+    
+    @IBAction func addButtonTapped(_ sender: UIButton) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        if let bottomSheetVC = storyboard.instantiateViewController(withIdentifier: "BottomSheetViewController") as? BottomSheetViewController {
+                
+            // Present as overlay
+            bottomSheetVC.modalPresentationStyle = .overCurrentContext
+            bottomSheetVC.modalTransitionStyle = .crossDissolve
+
+            self.present(bottomSheetVC, animated: true, completion: nil)
+        }
+    }
+    
     private func generateDates() {
         //Calendar Object
         let calendar = Calendar.current
@@ -67,8 +92,8 @@ class MainViewController: UIViewController {
         let calendar = Calendar.current //Current Calendar
         let today = Date() //Today's Date
         
-        let workCategory = TaskCategoryModel(name: "Work", color: UIColor.blue)
-        let personalCategory = TaskCategoryModel(name: "Personal", color: UIColor.red)
+        let workCategory = TaskCategoryModel(name: "Work", colorHex: "#F44336", isEditing: false)
+        let personalCategory = TaskCategoryModel(name: "Personal", colorHex: "#2196F3", isEditing: false)
         
         //Sample tasks
         let tasks = [

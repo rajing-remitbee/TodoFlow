@@ -16,12 +16,14 @@ class BottomSheetViewController: UIViewController {
     @IBOutlet var btnSubmit: UIButton! //Submit Button
     @IBOutlet var bottomDragHandle: UIView! //Bottom Drag Handle
     
+    weak var bottomSheetDelegate: BottomSheetDelegate? //Delegate for BottomSheet
+    
     private var initialBottomSheetY: CGFloat = 0 //Initial BottomSheet Height
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //Semi-Trnsparent Background
+        //Semi-Transparent Background
         self.view.backgroundColor = UIColor.black.withAlphaComponent(0.4)
         
         setUpBottomSheet()
@@ -29,12 +31,42 @@ class BottomSheetViewController: UIViewController {
         addPanGesture()
     }
     
+    private func setUpBottomSheet() {
+        //Corner Radius
+        bottomSheetView.layer.cornerRadius = 16
+        //Radius only on top
+        bottomSheetView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        bottomSheetView.layer.masksToBounds = true
+        
+        //Drag-Handle Radius
+        bottomDragHandle.layer.cornerRadius = 2
+
+        // Move bottom sheet off-screen initially
+        self.bottomSheetView.transform = CGAffineTransform(translationX: 0, y: self.view.frame.height)
+        
+        //Make keyboard popup
+        taskInput.becomeFirstResponder()
+        
+        //Setup today as initial date
+        updateDateChip(with: Date())
+        
+        //Setup default category
+        updateCategoryChip(with: TaskCategoryModel(name: "Default", colorHex: "#000000"))
+
+        // Animate the bottom sheet sliding up
+        DispatchQueue.main.async {
+            UIView.animate(withDuration: 0.3) {
+                self.bottomSheetView.transform = .identity
+            }
+        }
+    }
+    
     private func showDatePicker() {
         //Alert for calendar
         let alert = UIAlertController(title: "Select Date", message: "\n\n\n\n\n\n\n\n", preferredStyle: .actionSheet)
         let datePicker = UIDatePicker() //Date Picker
         datePicker.datePickerMode = .date //Date Picker Mode
-        datePicker.preferredDatePickerStyle = .compact //Data Picker Style
+        datePicker.preferredDatePickerStyle = .wheels //Data Picker Style
         datePicker.frame = CGRect(x: 10, y: 20, width: 250, height: 200)
 
         alert.view.addSubview(datePicker)
@@ -78,7 +110,49 @@ class BottomSheetViewController: UIViewController {
     }
     
     @IBAction func categoryButtonTapped(_ sender: UIButton) {
+        //View Category Picker
         showCategoryPicker()
+    }
+    
+    @IBAction func submitButtomTapped(_ sender: UIButton) {
+        guard let title = taskInput.text, !title.isEmpty else {
+            print("Task title is empty")
+            return
+        }
+        
+        let selectedDate = getSelectedDate()
+        let selectedCategory = getSelectedCategory()
+        
+        let newTask = TaskModel(title: title, date: selectedDate, category: selectedCategory)
+        
+        TaskStorage.shared.addTask(newTask)
+        
+        bottomSheetDelegate?.didAddTasks()
+        
+        dismissBottomSheet()
+    }
+    
+    //Fetch Selected Date
+    private func getSelectedDate() -> Date {
+        let dateFormatter = DateFormatter() //Date formatter
+        dateFormatter.dateFormat = "MMM d" //Format Date
+        
+        let buttonTitle = btnCalendar.title(for: .normal) ?? "Today"
+        
+        //Convert to date
+        if buttonTitle == "Today" {
+            return Date()
+        } else if buttonTitle == "Tomorrow" {
+            return Calendar.current.date(byAdding: .day, value: 1, to: Date()) ?? Date()
+        } else if buttonTitle == "Yesterday" {
+            return Calendar.current.date(byAdding: .day, value: -1, to: Date()) ?? Date()
+        } else {
+            return dateFormatter.date(from: buttonTitle) ?? Date()
+        }
+    }
+    
+    private func getSelectedCategory() -> TaskCategoryModel {
+        return TaskCategoryModel(name: btnCategory.title(for: .normal) ?? "Default", colorHex: btnCategory.layer.borderColor?.toHexString() ?? "#000000")
     }
     
     private func showCategoryPicker() {
@@ -90,43 +164,17 @@ class BottomSheetViewController: UIViewController {
             let action = UIAlertAction(title: category.name, style: .default) { _ in
                 self.updateCategoryChip(with: category)
             }
-            
-            // Add color preview
-            let colorView = UIView(frame: CGRect(x: 10, y: 8, width: 20, height: 20))
-            colorView.backgroundColor = UIColor(hex: category.colorHex)
-            colorView.layer.cornerRadius = 10
-            action.setValue(colorView, forKey: "image")
-            
             alert.addAction(action)
         }
-
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         present(alert, animated: true)
     }
     
     private func updateCategoryChip(with category: TaskCategoryModel) {
         btnCategory.setTitle(category.name, for: .normal)
-    }
-    
-    private func setUpBottomSheet() {
-        //Corner Radius
-        bottomSheetView.layer.cornerRadius = 16
-        //Radius only on top
-        bottomSheetView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-        bottomSheetView.layer.masksToBounds = true
-        
-        //Drag-Handle Radius
-        bottomDragHandle.layer.cornerRadius = 2
-
-        // Move bottom sheet off-screen initially
-        self.bottomSheetView.transform = CGAffineTransform(translationX: 0, y: self.view.frame.height)
-
-        // Animate the bottom sheet sliding up
-        DispatchQueue.main.async {
-            UIView.animate(withDuration: 0.3) {
-                self.bottomSheetView.transform = .identity
-            }
-        }
+        btnCategory.layer.borderColor = category.color.cgColor
+        btnCategory.layer.borderWidth = 1
+        btnCategory.layer.cornerRadius = 8
     }
 
     //Keyboard PopUp Observer
@@ -139,7 +187,7 @@ class BottomSheetViewController: UIViewController {
     @objc private func keyboardWillShow(_ notification: Notification) {
         if let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect {
             UIView.animate(withDuration: 0.3) {
-                self.bottomSheetView.transform = CGAffineTransform(translationX: 0, y: -keyboardFrame.height / 2)
+                self.bottomSheetView.transform = CGAffineTransform(translationX: 0, y: -keyboardFrame.height / 1.75)
             }
         }
     }
@@ -205,4 +253,8 @@ class BottomSheetViewController: UIViewController {
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
+}
+
+protocol BottomSheetDelegate: AnyObject {
+    func didAddTasks()
 }

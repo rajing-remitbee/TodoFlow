@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MainViewController: UIViewController {
+class MainViewController: UIViewController, BottomSheetDelegate {
     
     var dates: [Date] = []
     var taskSection: [TaskSectionModel] = []
@@ -16,7 +16,8 @@ class MainViewController: UIViewController {
     @IBOutlet var dataCollectionView: UICollectionView! //CollectionView Component
     @IBOutlet var taskTableView: UITableView! //TableView Component
     @IBOutlet var bottomView: UIView! //BottomView Component
-
+    @IBOutlet var noTasksImage: UIImageView! //No Tasks Image Component
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -47,6 +48,10 @@ class MainViewController: UIViewController {
         dataCollectionView.scrollToItem(at: IndexPath(item: todayIndex, section: 0), at: .centeredHorizontally, animated: false)
     }
     
+    func didAddTasks() {
+        generateTasks()
+    }
+    
     //Menu Button Tapped
     @IBAction func menuButtonTapped(_ sender: UIButton) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -67,6 +72,7 @@ class MainViewController: UIViewController {
             // Present as overlay
             bottomSheetVC.modalPresentationStyle = .overCurrentContext
             bottomSheetVC.modalTransitionStyle = .crossDissolve
+            bottomSheetVC.bottomSheetDelegate = self
 
             self.present(bottomSheetVC, animated: true, completion: nil)
         }
@@ -90,20 +96,10 @@ class MainViewController: UIViewController {
     
     private func generateTasks() {
         let calendar = Calendar.current //Current Calendar
-        let today = Date() //Today's Date
         
-        let workCategory = TaskCategoryModel(name: "Work", colorHex: "#F44336", isEditing: false)
-        let personalCategory = TaskCategoryModel(name: "Personal", colorHex: "#2196F3", isEditing: false)
+        //Fetch tasks
+        let tasks = TaskStorage.shared.getTasks()
         
-        //Sample tasks
-        let tasks = [
-            TaskModel(title: "Buy groceries", date: today, category: personalCategory),
-            TaskModel(title: "Call John", date: today, category: personalCategory),
-            TaskModel(title: "Finish report", date: calendar.date(byAdding: .day, value: 1, to: today)!, category: workCategory),
-            TaskModel(title: "Gym workout", date: calendar.date(byAdding: .day, value: -1, to: today)!, category: personalCategory),
-            TaskModel(title: "Read a book", date: calendar.date(byAdding: .day, value: 2, to: today)!, category: personalCategory),
-            TaskModel(title: "Standup Call", date: calendar.date(byAdding: .day, value: 3, to: today)!, category: workCategory),
-        ]
         // Group tasks by date
         let groupedTasks = Dictionary(grouping: tasks) { task in
             calendar.startOfDay(for: task.date) // Normalize date to start of day
@@ -113,6 +109,10 @@ class MainViewController: UIViewController {
         taskSection = groupedTasks.map { date, tasks in
             TaskSectionModel(date: date, tasks: tasks)
         }.sorted { $0.date < $1.date } // Sort sections by date
+        
+        let hasTasks = !taskSection.isEmpty
+        noTasksImage.isHidden = hasTasks
+        taskTableView.isHidden = !hasTasks
         
         //Reload data in table
         taskTableView.reloadData()

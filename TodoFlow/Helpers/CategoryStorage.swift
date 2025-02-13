@@ -23,7 +23,7 @@ class CategoryStorage {
             return (try? decoder.decode([TaskCategoryModel].self, from: data)) ?? [] //Decode date
         }
         //Return empty array if no data available
-        return []
+        return [TaskCategoryModel(name: "Default", colorHex: "#000000")]
     }
     
     //Save Categories Method

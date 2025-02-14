@@ -152,7 +152,7 @@ class BottomSheetMenuViewController: UIViewController, UITableViewDelegate {
             ("Light Blue", "#03A9F4"),
             ("Teal", "#009688"),
             ("Green", "#4CAF50"),
-            ("Light", "#8BC34A"),
+            ("Light Green", "#8BC34A"),
             ("Lime", "#CDDC39"),
             ("Yellow", "#FFEB3B"),
             ("Amber", "#FFC107"),

@@ -52,6 +52,16 @@ class MainViewController: UIViewController, BottomSheetDelegate {
         generateTasks()
     }
     
+    //Search Button Tapped
+    @IBAction func searchButtonTapped(_ sender: UIButton) {
+        //Parent storyboard
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        //Check for desination and transition user
+        if let searchVC = storyboard.instantiateViewController(withIdentifier: "SearchViewController") as? SearchViewController {
+            navigationController?.pushViewController(searchVC, animated: true)
+        }
+    }
+    
     //Menu Button Tapped
     @IBAction func menuButtonTapped(_ sender: UIButton) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)

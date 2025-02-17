@@ -255,6 +255,3 @@ class BottomSheetViewController: UIViewController {
     }
 }
 
-protocol BottomSheetDelegate: AnyObject {
-    func didAddTasks()
-}

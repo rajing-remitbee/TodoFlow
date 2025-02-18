@@ -41,10 +41,21 @@ class TaskStorage {
     
     //Remove Task Method
     func removeTask(_ task: TaskModel) {
-        var tasks = getTasks()
+        var tasks = getTasks() //Retrieve existing tasks
+        //Check for task to remove
         if let index = tasks.firstIndex(where: { $0.title == task.title && $0.date == task.date }) {
-            tasks.remove(at: index)
+            tasks.remove(at: index) //Remove the task
             saveTasks(tasks) // Update UserDefaults
         }
+    }
+    
+    //Update Task Method
+    func updateTask(_ updatedTask: TaskModel) {
+        var tasks = getTasks() //Retrieve existing tasks
+        //Check for task to update
+        if let index = tasks.firstIndex(where: { $0.title == updatedTask.title && $0.date == updatedTask.date }) {
+            tasks[index] = updatedTask //Update the task
+        }
+        saveTasks(tasks) //Update in UserDefaults
     }
 }

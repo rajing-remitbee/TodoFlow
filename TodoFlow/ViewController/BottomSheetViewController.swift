@@ -123,7 +123,7 @@ class BottomSheetViewController: UIViewController {
         let selectedDate = getSelectedDate()
         let selectedCategory = getSelectedCategory()
         
-        let newTask = TaskModel(title: title, date: selectedDate, category: selectedCategory)
+        let newTask = TaskModel(title: title, date: selectedDate, category: selectedCategory, isCompleted: false)
         
         TaskStorage.shared.addTask(newTask)
         

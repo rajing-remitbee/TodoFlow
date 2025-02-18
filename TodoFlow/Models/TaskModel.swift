@@ -11,4 +11,5 @@ struct TaskModel: Codable {
     let title: String
     let date: Date
     let category: TaskCategoryModel
+    var isCompleted: Bool
 }

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MainViewController: UIViewController, BottomSheetDelegate {
+class MainViewController: UIViewController, BottomSheetDelegate, TaskCellDelegate {
     
     var dates: [Date] = []
     var taskSection: [TaskSectionModel] = []
@@ -46,6 +46,15 @@ class MainViewController: UIViewController, BottomSheetDelegate {
         // Scroll to today's date
         let todayIndex = dates.firstIndex { Calendar.current.isDate($0, inSameDayAs: Date()) } ?? 0
         dataCollectionView.scrollToItem(at: IndexPath(item: todayIndex, section: 0), at: .centeredHorizontally, animated: false)
+    }
+    
+    func toggleTaskCompletion(at indexPath: IndexPath) {
+        // Toggle completion state
+        taskSection[indexPath.section].tasks[indexPath.row].isCompleted.toggle()
+        // Save to storage
+        TaskStorage.shared.updateTask(taskSection[indexPath.section].tasks[indexPath.row])
+        // Reload row
+        taskTableView.reloadRows(at: [indexPath], with: .automatic)
     }
     
     func didAddTasks() {
@@ -211,6 +220,8 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TaskCell", for: indexPath) as! TaskCell
         //Individual task
         let task = taskSection[indexPath.section].tasks[indexPath.row]
+        //Set delegate for cell
+        cell.delegate = self
         //Cell configuration for the task
         cell.configure(with: task)
         return cell

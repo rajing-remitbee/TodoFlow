@@ -224,5 +224,56 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
             headerView.textLabel?.font = UIFont.systemFont(ofSize: 10, weight: .medium)
         }
     }
+    
+    func deleteTask(at indexPath: IndexPath) {
+        // Retrieve the task to delete
+        let task = taskSection[indexPath.section].tasks[indexPath.row]
+        
+        // Remove the task from storage
+        TaskStorage.shared.removeTask(task)
+        
+        // Begin table view updates
+        taskTableView.beginUpdates()
+        
+        // Remove the task from the local data source
+        taskSection[indexPath.section].tasks.remove(at: indexPath.row)
+
+        // If the section is empty, remove the entire section
+        if taskSection[indexPath.section].tasks.isEmpty {
+            taskSection.remove(at: indexPath.section)
+            taskTableView.deleteSections(IndexSet(integer: indexPath.section), with: .fade)
+        } else {
+            // Otherwise, just remove the row
+            taskTableView.deleteRows(at: [indexPath], with: .fade)
+        }
+        
+        // End updates to synchronize data and table view
+        taskTableView.endUpdates()
+        
+        // Ensure no-tasks image appears if no tasks are left
+        if(taskSection.isEmpty) {
+            noTasksImage.isHidden = false
+            taskTableView.isHidden = true
+        } else {
+            noTasksImage.isHidden = true
+            taskTableView.isHidden = false
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { [weak self] (_, _, completionHandler) in
+            guard let self = self else { return }
+            
+            //Delete tasks from storage
+            self.deleteTask(at: indexPath)
+            
+            //Completion Handler
+            completionHandler(true)
+        }
+        
+        deleteAction.backgroundColor = .red // Customize swipe color
+        
+        return UISwipeActionsConfiguration(actions: [deleteAction])
+    }
 }
 

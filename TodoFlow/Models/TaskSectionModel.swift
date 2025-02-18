@@ -8,6 +8,6 @@
 import Foundation
 
 struct TaskSectionModel {
-    let date: Date
-    let tasks: [TaskModel]
+    var date: Date
+    var tasks: [TaskModel]
 }

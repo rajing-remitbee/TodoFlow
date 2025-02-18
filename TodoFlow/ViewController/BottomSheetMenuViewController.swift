@@ -12,6 +12,8 @@ class BottomSheetMenuViewController: UIViewController, UITableViewDelegate {
     @IBOutlet var categoryTableView: UITableView! //Categories Table
     @IBOutlet var bottomSheetMenuView: UIView! //BottomSheet Menu View
     @IBOutlet var bottomSheetDragHandle: UIView! //BottomSheet Drag Handle
+    @IBOutlet var statisticsStack: UIStackView!
+    @IBOutlet var settingsStack: UIStackView!
     
     var taskCategories: [TaskCategoryModel] = [] //Task Categories Array
     var isAddingNewList = false //Edit Mode
@@ -36,6 +38,7 @@ class BottomSheetMenuViewController: UIViewController, UITableViewDelegate {
         setUpBottomSheet() //Setup Bottomsheet
         setupCategories() //Setup Categories
         addPanGesture() //Setup PanGesture
+        setupNavigations() //Navigations for Statistics and Settings
     }
     
     //When keyboard pops up
@@ -90,6 +93,23 @@ class BottomSheetMenuViewController: UIViewController, UITableViewDelegate {
     private func addPanGesture() {
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture(_:))) //Setup PanGesture
         bottomSheetMenuView.addGestureRecognizer(panGesture) //Add PanGesture to BottomSheet
+    }
+    
+    //Setup Navigations
+    private func setupNavigations() {
+        settingsStack.isUserInteractionEnabled = true
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(settingsTapped))
+        settingsStack.addGestureRecognizer(tapGesture)
+    }
+    
+    @objc func settingsTapped() {
+        //Parent storyboard
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        //Check for desination and transition user
+        if let settingsVC = storyboard.instantiateViewController(withIdentifier: "SettingsViewController") as? SettingsViewController {
+            settingsVC.modalPresentationStyle = .fullScreen // Full-screen modal (optional)
+            self.present(settingsVC, animated: true, completion: nil)
+        }
     }
     
     //Handle Pan Gesture

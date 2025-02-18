@@ -38,4 +38,13 @@ class TaskStorage {
         tasks.insert(task, at: 0) // Insert new task at the beginning
         saveTasks(tasks) // Save updated list
     }
+    
+    //Remove Task Method
+    func removeTask(_ task: TaskModel) {
+        var tasks = getTasks()
+        if let index = tasks.firstIndex(where: { $0.title == task.title && $0.date == task.date }) {
+            tasks.remove(at: index)
+            saveTasks(tasks) // Update UserDefaults
+        }
+    }
 }

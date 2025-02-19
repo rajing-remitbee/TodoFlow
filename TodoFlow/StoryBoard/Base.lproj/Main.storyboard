@@ -1326,10 +1326,69 @@
                                 <color key="textColor" red="0.4941176471" green="0.51764705879999995" blue="0.56862745100000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g8X-wM-7ad" customClass="HorizontalBarChartView" customModule="DGCharts">
+                                <rect key="frame" x="20" y="284" width="353" height="254"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="W7z-fC-6um">
+                                <rect key="frame" x="20" y="558" width="353" height="240"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="240" id="MVx-45-7P1"/>
+                                </constraints>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="CategoryStatistics" rowHeight="60" id="c78-zo-Vwd" userLabel="CategoryStatistics" customClass="CategoryStatisticsViewCell" customModule="TodoFlow" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="50" width="353" height="60"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="c78-zo-Vwd" id="ZrW-0l-BIu" customClass="CategoryStatisticsViewCell" customModule="TodoFlow" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="0.0" width="353" height="60"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iD5-bd-RpG">
+                                                    <rect key="frame" x="28" y="26" width="8" height="8"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="10"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Personal" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V5X-Zs-P7a">
+                                                    <rect key="frame" x="39" y="23" width="60" height="12"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="10"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ckS-6h-aob" userLabel="Complete Count">
+                                                    <rect key="frame" x="148" y="21" width="57" height="17"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gJa-Nw-kX1" userLabel="Complete Rate">
+                                                    <rect key="frame" x="276" y="21" width="57" height="17"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="categoryBox" destination="iD5-bd-RpG" id="ss2-Qr-PEV"/>
+                                            <outlet property="categoryLabel" destination="V5X-Zs-P7a" id="N7u-iQ-yKh"/>
+                                            <outlet property="completeCountLabel" destination="ckS-6h-aob" id="OIP-W6-kwG"/>
+                                            <outlet property="completeRateLabel" destination="gJa-Nw-kX1" id="hGu-RY-ryi"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Fzm-iZ-05k"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="Fzm-iZ-05k" firstAttribute="trailing" secondItem="W7z-fC-6um" secondAttribute="trailing" constant="20" id="2Om-IO-yA4"/>
+                            <constraint firstItem="W7z-fC-6um" firstAttribute="top" secondItem="g8X-wM-7ad" secondAttribute="bottom" constant="20" id="5eI-PZ-Rx7"/>
                             <constraint firstItem="u59-1g-d8I" firstAttribute="top" secondItem="cWY-Wt-9Vq" secondAttribute="bottom" constant="4" id="8p0-An-cJE"/>
                             <constraint firstItem="u59-1g-d8I" firstAttribute="leading" secondItem="Fzm-iZ-05k" secondAttribute="leading" constant="20" id="8xB-lN-dsM"/>
                             <constraint firstItem="LJf-sk-oT2" firstAttribute="top" secondItem="GwB-5l-pGs" secondAttribute="bottom" constant="15" id="DfX-uG-rLk"/>
@@ -1340,18 +1399,25 @@
                             <constraint firstItem="cWY-Wt-9Vq" firstAttribute="top" secondItem="GwB-5l-pGs" secondAttribute="bottom" constant="16" id="NP4-ho-EYd"/>
                             <constraint firstItem="ler-Ie-Z5A" firstAttribute="top" secondItem="cm8-G9-MBq" secondAttribute="bottom" constant="16" id="Pkg-Wl-Z5c"/>
                             <constraint firstItem="cWY-Wt-9Vq" firstAttribute="leading" secondItem="Fzm-iZ-05k" secondAttribute="leading" constant="20" id="QCM-yT-5Pr"/>
+                            <constraint firstItem="Fzm-iZ-05k" firstAttribute="trailing" secondItem="g8X-wM-7ad" secondAttribute="trailing" constant="20" id="QMG-fR-y4R"/>
                             <constraint firstItem="LJf-sk-oT2" firstAttribute="leading" secondItem="cWY-Wt-9Vq" secondAttribute="trailing" constant="56" id="TL3-kD-rRQ"/>
                             <constraint firstItem="GwB-5l-pGs" firstAttribute="leading" secondItem="Fzm-iZ-05k" secondAttribute="leading" constant="20" id="UZr-PE-wad"/>
                             <constraint firstItem="MAx-Ls-bhy" firstAttribute="leading" secondItem="cm8-G9-MBq" secondAttribute="trailing" constant="4" id="Y12-z9-MUE"/>
+                            <constraint firstItem="g8X-wM-7ad" firstAttribute="leading" secondItem="Fzm-iZ-05k" secondAttribute="leading" constant="20" id="azU-0k-VSP"/>
+                            <constraint firstItem="W7z-fC-6um" firstAttribute="leading" secondItem="Fzm-iZ-05k" secondAttribute="leading" constant="20" id="fMQ-9a-Ox1"/>
+                            <constraint firstItem="Fzm-iZ-05k" firstAttribute="bottom" secondItem="W7z-fC-6um" secondAttribute="bottom" constant="20" id="iJK-M1-uOa"/>
                             <constraint firstItem="GwB-5l-pGs" firstAttribute="top" secondItem="ler-Ie-Z5A" secondAttribute="bottom" constant="12" id="nIC-bt-qFB"/>
                             <constraint firstItem="Fzm-iZ-05k" firstAttribute="trailing" secondItem="GwB-5l-pGs" secondAttribute="trailing" constant="20" id="o0o-qa-xhf"/>
                             <constraint firstItem="MAx-Ls-bhy" firstAttribute="top" secondItem="Fzm-iZ-05k" secondAttribute="top" constant="16" id="qdd-Vl-FWN"/>
                             <constraint firstItem="cm8-G9-MBq" firstAttribute="leading" secondItem="Fzm-iZ-05k" secondAttribute="leading" constant="8" id="rMZ-Jo-Pqx"/>
+                            <constraint firstItem="g8X-wM-7ad" firstAttribute="top" secondItem="u59-1g-d8I" secondAttribute="bottom" constant="20" id="xrz-Jb-agK"/>
                             <constraint firstItem="kTM-t1-h5z" firstAttribute="leading" secondItem="u59-1g-d8I" secondAttribute="trailing" constant="56" id="yqg-MV-R9n"/>
                             <constraint firstItem="cm8-G9-MBq" firstAttribute="top" secondItem="Fzm-iZ-05k" secondAttribute="top" constant="8" id="zDB-X3-FL3"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="categoryStatistics" destination="W7z-fC-6um" id="DBK-I0-pDt"/>
+                        <outlet property="chartView" destination="g8X-wM-7ad" id="PxB-Lv-dv8"/>
                         <outlet property="completedLabel" destination="cWY-Wt-9Vq" id="5Wd-dK-QmW"/>
                         <outlet property="completionRateLabel" destination="LJf-sk-oT2" id="dlw-3h-yv1"/>
                         <outlet property="filterView" destination="GwB-5l-pGs" id="0oF-1O-uYe"/>

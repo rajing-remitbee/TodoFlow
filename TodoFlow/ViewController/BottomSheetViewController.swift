@@ -94,7 +94,7 @@ class BottomSheetViewController: UIViewController {
         let selectedDay = calendar.startOfDay(for: date)
         //Format Date
         let formatter = DateFormatter()
-        formatter.dateFormat = "MMM d"
+        formatter.dateFormat = "MMM d, yyyy"
         var dateText = formatter.string(from: date)
         //Format if today's date
         if selectedDay == today {
@@ -135,7 +135,7 @@ class BottomSheetViewController: UIViewController {
     //Fetch Selected Date
     private func getSelectedDate() -> Date {
         let dateFormatter = DateFormatter() //Date formatter
-        dateFormatter.dateFormat = "MMM d" //Format Date
+        dateFormatter.dateFormat = "MMM d, yyyy" //Format Date
         
         let buttonTitle = btnCalendar.title(for: .normal) ?? "Today"
         

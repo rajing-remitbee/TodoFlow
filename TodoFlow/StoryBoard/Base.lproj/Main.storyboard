@@ -1291,32 +1291,69 @@
                                 </connections>
                             </segmentedControl>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cWY-Wt-9Vq">
-                                <rect key="frame" x="20" y="200" width="89" height="43"/>
+                                <rect key="frame" x="20" y="200" width="120" height="43"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="120" id="hTa-x6-atq"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="36"/>
                                 <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tasks completed" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u59-1g-d8I">
+                                <rect key="frame" x="20" y="247" width="120" height="17"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="120" id="MDb-c8-XJP"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
+                                <color key="textColor" red="0.49411764705882355" green="0.51764705882352935" blue="0.56862745098039214" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LJf-sk-oT2">
+                                <rect key="frame" x="196" y="199" width="120" height="43"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="120" id="3bB-h2-Pgs"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="36"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Completion rate" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kTM-t1-h5z">
+                                <rect key="frame" x="196" y="246" width="120" height="17"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="120" id="its-t5-ZjE"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
+                                <color key="textColor" red="0.4941176471" green="0.51764705879999995" blue="0.56862745100000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Fzm-iZ-05k"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="cWY-Wt-9Vq" firstAttribute="top" secondItem="GwB-5l-pGs" secondAttribute="bottom" constant="16" id="ADB-kU-MGM"/>
-                            <constraint firstItem="cWY-Wt-9Vq" firstAttribute="leading" secondItem="Fzm-iZ-05k" secondAttribute="leading" constant="20" id="FFh-Qx-peZ"/>
+                            <constraint firstItem="u59-1g-d8I" firstAttribute="top" secondItem="cWY-Wt-9Vq" secondAttribute="bottom" constant="4" id="8p0-An-cJE"/>
+                            <constraint firstItem="u59-1g-d8I" firstAttribute="leading" secondItem="Fzm-iZ-05k" secondAttribute="leading" constant="20" id="8xB-lN-dsM"/>
+                            <constraint firstItem="LJf-sk-oT2" firstAttribute="top" secondItem="GwB-5l-pGs" secondAttribute="bottom" constant="15" id="DfX-uG-rLk"/>
                             <constraint firstItem="ler-Ie-Z5A" firstAttribute="leading" secondItem="McA-ey-hMc" secondAttribute="leading" id="FK4-ck-mnB"/>
+                            <constraint firstItem="kTM-t1-h5z" firstAttribute="top" secondItem="LJf-sk-oT2" secondAttribute="bottom" constant="4" id="IaN-4R-LFS"/>
                             <constraint firstAttribute="trailing" secondItem="ler-Ie-Z5A" secondAttribute="trailing" id="J7u-Bd-CyF"/>
                             <constraint firstItem="Fzm-iZ-05k" firstAttribute="trailing" secondItem="MAx-Ls-bhy" secondAttribute="trailing" constant="8" id="KIh-Xm-7tK"/>
+                            <constraint firstItem="cWY-Wt-9Vq" firstAttribute="top" secondItem="GwB-5l-pGs" secondAttribute="bottom" constant="16" id="NP4-ho-EYd"/>
                             <constraint firstItem="ler-Ie-Z5A" firstAttribute="top" secondItem="cm8-G9-MBq" secondAttribute="bottom" constant="16" id="Pkg-Wl-Z5c"/>
+                            <constraint firstItem="cWY-Wt-9Vq" firstAttribute="leading" secondItem="Fzm-iZ-05k" secondAttribute="leading" constant="20" id="QCM-yT-5Pr"/>
+                            <constraint firstItem="LJf-sk-oT2" firstAttribute="leading" secondItem="cWY-Wt-9Vq" secondAttribute="trailing" constant="56" id="TL3-kD-rRQ"/>
                             <constraint firstItem="GwB-5l-pGs" firstAttribute="leading" secondItem="Fzm-iZ-05k" secondAttribute="leading" constant="20" id="UZr-PE-wad"/>
                             <constraint firstItem="MAx-Ls-bhy" firstAttribute="leading" secondItem="cm8-G9-MBq" secondAttribute="trailing" constant="4" id="Y12-z9-MUE"/>
                             <constraint firstItem="GwB-5l-pGs" firstAttribute="top" secondItem="ler-Ie-Z5A" secondAttribute="bottom" constant="12" id="nIC-bt-qFB"/>
                             <constraint firstItem="Fzm-iZ-05k" firstAttribute="trailing" secondItem="GwB-5l-pGs" secondAttribute="trailing" constant="20" id="o0o-qa-xhf"/>
                             <constraint firstItem="MAx-Ls-bhy" firstAttribute="top" secondItem="Fzm-iZ-05k" secondAttribute="top" constant="16" id="qdd-Vl-FWN"/>
                             <constraint firstItem="cm8-G9-MBq" firstAttribute="leading" secondItem="Fzm-iZ-05k" secondAttribute="leading" constant="8" id="rMZ-Jo-Pqx"/>
+                            <constraint firstItem="kTM-t1-h5z" firstAttribute="leading" secondItem="u59-1g-d8I" secondAttribute="trailing" constant="56" id="yqg-MV-R9n"/>
                             <constraint firstItem="cm8-G9-MBq" firstAttribute="top" secondItem="Fzm-iZ-05k" secondAttribute="top" constant="8" id="zDB-X3-FL3"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="completedLabel" destination="cWY-Wt-9Vq" id="5Wd-dK-QmW"/>
+                        <outlet property="completionRateLabel" destination="LJf-sk-oT2" id="dlw-3h-yv1"/>
                         <outlet property="filterView" destination="GwB-5l-pGs" id="0oF-1O-uYe"/>
                     </connections>
                 </viewController>

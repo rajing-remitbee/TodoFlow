@@ -12,8 +12,8 @@ class BottomSheetMenuViewController: UIViewController, UITableViewDelegate {
     @IBOutlet var categoryTableView: UITableView! //Categories Table
     @IBOutlet var bottomSheetMenuView: UIView! //BottomSheet Menu View
     @IBOutlet var bottomSheetDragHandle: UIView! //BottomSheet Drag Handle
-    @IBOutlet var statisticsStack: UIStackView!
-    @IBOutlet var settingsStack: UIStackView!
+    @IBOutlet var statisticsStack: UIStackView! //Statistics View
+    @IBOutlet var settingsStack: UIStackView! //Settings View
     
     var taskCategories: [TaskCategoryModel] = [] //Task Categories Array
     var isAddingNewList = false //Edit Mode
@@ -97,9 +97,25 @@ class BottomSheetMenuViewController: UIViewController, UITableViewDelegate {
     
     //Setup Navigations
     private func setupNavigations() {
+        //Setup Navigation for Statistics
+        statisticsStack.isUserInteractionEnabled = true
+        let statisticsTapGesture = UITapGestureRecognizer(target: self, action: #selector(statisticsTapped))
+        statisticsStack.addGestureRecognizer(statisticsTapGesture)
+        
+        //Setup Navigation for Settings
         settingsStack.isUserInteractionEnabled = true
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(settingsTapped))
-        settingsStack.addGestureRecognizer(tapGesture)
+        let settingsTapGesture = UITapGestureRecognizer(target: self, action: #selector(settingsTapped))
+        settingsStack.addGestureRecognizer(settingsTapGesture)
+    }
+    
+    @objc func statisticsTapped() {
+        //Parent storyboard
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        //Check for desination and transition user
+        if let statisticsVC = storyboard.instantiateViewController(withIdentifier: "StatisticsViewController") as? StatisticsViewController {
+            statisticsVC.modalPresentationStyle = .fullScreen // Full-screen modal (optional)
+            self.present(statisticsVC, animated: true, completion: nil)
+        }
     }
     
     @objc func settingsTapped() {

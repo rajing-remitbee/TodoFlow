@@ -265,7 +265,7 @@
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eRh-52-1Jy">
-                                                <rect key="frame" x="16" y="93" width="120" height="34"/>
+                                                <rect key="frame" x="16" y="93" width="163" height="34"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="tintColor" red="0.49411764705882355" green="0.51764705882352935" blue="0.56862745098039214" alpha="0.5" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <state key="normal" title="Button"/>
@@ -277,7 +277,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5YG-BE-oqR">
-                                                <rect key="frame" x="152" y="93" width="120" height="34"/>
+                                                <rect key="frame" x="187" y="93" width="120" height="34"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="tintColor" red="0.4941176471" green="0.51764705879999995" blue="0.56862745100000001" alpha="0.5" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <state key="normal" title="Button"/>
@@ -1237,6 +1237,92 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="33u-sy-v9m" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1861.8320610687022" y="688.73239436619724"/>
+        </scene>
+        <!--Statistics View Controller-->
+        <scene sceneID="c64-N3-3EN">
+            <objects>
+                <viewController storyboardIdentifier="StatisticsViewController" id="gD9-o9-Q0c" customClass="StatisticsViewController" customModule="TodoFlow" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="McA-ey-hMc">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cm8-G9-MBq">
+                                <rect key="frame" x="8" y="67" width="48" height="48"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="KRX-Y4-K3Y"/>
+                                    <constraint firstAttribute="width" constant="48" id="zJR-rq-upM"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="BackButton.png"/>
+                                <connections>
+                                    <action selector="onBackButtonTapped:" destination="Rwu-gN-clf" eventType="touchUpInside" id="P20-l2-4QX"/>
+                                    <action selector="onBackButtonTapped:" destination="gD9-o9-Q0c" eventType="touchUpInside" id="gSd-58-3do"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Statistics" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MAx-Ls-bhy">
+                                <rect key="frame" x="60" y="75" width="325" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="32" id="yI5-d8-lOr"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ler-Ie-Z5A" userLabel="Divider">
+                                <rect key="frame" x="0.0" y="131" width="393" height="1"/>
+                                <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="vp2-82-Hoh"/>
+                                </constraints>
+                            </view>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="GwB-5l-pGs">
+                                <rect key="frame" x="20" y="144" width="353" height="41"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="C0I-XK-g6u"/>
+                                </constraints>
+                                <segments>
+                                    <segment title="Weekly"/>
+                                    <segment title="Monthly"/>
+                                    <segment title="Yearly"/>
+                                    <segment title="All"/>
+                                </segments>
+                                <connections>
+                                    <action selector="filterChanged:" destination="gD9-o9-Q0c" eventType="valueChanged" id="rKT-0b-3x8"/>
+                                </connections>
+                            </segmentedControl>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cWY-Wt-9Vq">
+                                <rect key="frame" x="20" y="200" width="89" height="43"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="36"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Fzm-iZ-05k"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="cWY-Wt-9Vq" firstAttribute="top" secondItem="GwB-5l-pGs" secondAttribute="bottom" constant="16" id="ADB-kU-MGM"/>
+                            <constraint firstItem="cWY-Wt-9Vq" firstAttribute="leading" secondItem="Fzm-iZ-05k" secondAttribute="leading" constant="20" id="FFh-Qx-peZ"/>
+                            <constraint firstItem="ler-Ie-Z5A" firstAttribute="leading" secondItem="McA-ey-hMc" secondAttribute="leading" id="FK4-ck-mnB"/>
+                            <constraint firstAttribute="trailing" secondItem="ler-Ie-Z5A" secondAttribute="trailing" id="J7u-Bd-CyF"/>
+                            <constraint firstItem="Fzm-iZ-05k" firstAttribute="trailing" secondItem="MAx-Ls-bhy" secondAttribute="trailing" constant="8" id="KIh-Xm-7tK"/>
+                            <constraint firstItem="ler-Ie-Z5A" firstAttribute="top" secondItem="cm8-G9-MBq" secondAttribute="bottom" constant="16" id="Pkg-Wl-Z5c"/>
+                            <constraint firstItem="GwB-5l-pGs" firstAttribute="leading" secondItem="Fzm-iZ-05k" secondAttribute="leading" constant="20" id="UZr-PE-wad"/>
+                            <constraint firstItem="MAx-Ls-bhy" firstAttribute="leading" secondItem="cm8-G9-MBq" secondAttribute="trailing" constant="4" id="Y12-z9-MUE"/>
+                            <constraint firstItem="GwB-5l-pGs" firstAttribute="top" secondItem="ler-Ie-Z5A" secondAttribute="bottom" constant="12" id="nIC-bt-qFB"/>
+                            <constraint firstItem="Fzm-iZ-05k" firstAttribute="trailing" secondItem="GwB-5l-pGs" secondAttribute="trailing" constant="20" id="o0o-qa-xhf"/>
+                            <constraint firstItem="MAx-Ls-bhy" firstAttribute="top" secondItem="Fzm-iZ-05k" secondAttribute="top" constant="16" id="qdd-Vl-FWN"/>
+                            <constraint firstItem="cm8-G9-MBq" firstAttribute="leading" secondItem="Fzm-iZ-05k" secondAttribute="leading" constant="8" id="rMZ-Jo-Pqx"/>
+                            <constraint firstItem="cm8-G9-MBq" firstAttribute="top" secondItem="Fzm-iZ-05k" secondAttribute="top" constant="8" id="zDB-X3-FL3"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="completedLabel" destination="cWY-Wt-9Vq" id="5Wd-dK-QmW"/>
+                        <outlet property="filterView" destination="GwB-5l-pGs" id="0oF-1O-uYe"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AC8-nN-EJZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2771.7557251908397" y="688.73239436619724"/>
         </scene>
     </scenes>
     <resources>

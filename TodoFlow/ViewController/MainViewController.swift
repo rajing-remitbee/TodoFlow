@@ -7,16 +7,16 @@
 
 import UIKit
 
-class MainViewController: UIViewController, BottomSheetDelegate, TaskCellDelegate {
-    
-    var dates: [Date] = []
-    var taskSection: [TaskSectionModel] = []
+class MainViewController: UIViewController {
     
     @IBOutlet var profileImageView: UIImageView! //ProfileImageView Component
     @IBOutlet var dataCollectionView: UICollectionView! //CollectionView Component
     @IBOutlet var taskTableView: UITableView! //TableView Component
     @IBOutlet var bottomView: UIView! //BottomView Component
     @IBOutlet var noTasksImage: UIImageView! //No Tasks Image Component
+    
+    var dates: [Date] = []
+    var taskSection: [TaskSectionModel] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,19 +48,6 @@ class MainViewController: UIViewController, BottomSheetDelegate, TaskCellDelegat
         dataCollectionView.scrollToItem(at: IndexPath(item: todayIndex, section: 0), at: .centeredHorizontally, animated: false)
     }
     
-    func toggleTaskCompletion(at indexPath: IndexPath) {
-        // Toggle completion state
-        taskSection[indexPath.section].tasks[indexPath.row].isCompleted.toggle()
-        // Save to storage
-        TaskStorage.shared.updateTask(taskSection[indexPath.section].tasks[indexPath.row])
-        // Reload row
-        taskTableView.reloadRows(at: [indexPath], with: .automatic)
-    }
-    
-    func didAddTasks() {
-        generateTasks()
-    }
-    
     //Search Button Tapped
     @IBAction func searchButtonTapped(_ sender: UIButton) {
         //Parent storyboard
@@ -84,6 +71,7 @@ class MainViewController: UIViewController, BottomSheetDelegate, TaskCellDelegat
             }
     }
     
+    //Add Button Tapped
     @IBAction func addButtonTapped(_ sender: UIButton) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         if let bottomSheetVC = storyboard.instantiateViewController(withIdentifier: "BottomSheetViewController") as? BottomSheetViewController {
@@ -223,7 +211,7 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
         //Set delegate for cell
         cell.delegate = self
         //Cell configuration for the task
-        cell.configure(with: task)
+        cell.configure(with: task, index: indexPath)
         return cell
     }
     
@@ -286,5 +274,27 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
         
         return UISwipeActionsConfiguration(actions: [deleteAction])
     }
+}
+
+extension MainViewController: TaskCellDelegate {
+    
+    func toggleTaskCompletion(at indexPath: IndexPath) {
+        // Toggle completion state
+        taskSection[indexPath.section].tasks[indexPath.row].isCompleted.toggle()
+        // Save to storage
+        TaskStorage.shared.updateTask(taskSection[indexPath.section].tasks[indexPath.row])
+        // Reload row
+        taskTableView.reloadRows(at: [indexPath], with: .automatic)
+    }
+    
+}
+
+extension MainViewController: BottomSheetDelegate {
+    
+    //DidAddTasks - Delegate Method
+    func didAddTasks() {
+        generateTasks() //Reload the data
+    }
+    
 }
 

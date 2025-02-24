@@ -8,5 +8,8 @@
 import Foundation
 
 enum StatisticsFilter {
-    case weekly, monthly, yearly, all
+    case weekly
+    case monthly
+    case yearly
+    case all
 }

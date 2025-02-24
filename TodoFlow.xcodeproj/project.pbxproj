@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		ED40A70C2D65BDBF00EB7BC5 /* DGCharts in Frameworks */ = {isa = PBXBuildFile; productRef = ED40A70B2D65BDBF00EB7BC5 /* DGCharts */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		ED98CEEA2D536CB00073779C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -65,6 +69,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ED40A70C2D65BDBF00EB7BC5 /* DGCharts in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -125,6 +130,7 @@
 			);
 			name = TodoFlow;
 			packageProductDependencies = (
+				ED40A70B2D65BDBF00EB7BC5 /* DGCharts */,
 			);
 			productName = TodoFlow;
 			productReference = ED98CED32D536CAD0073779C /* TodoFlow.app */;
@@ -208,6 +214,9 @@
 			);
 			mainGroup = ED98CECA2D536CAD0073779C;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				ED40A70A2D65BDBF00EB7BC5 /* XCRemoteSwiftPackageReference "Charts" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = ED98CED42D536CAD0073779C /* Products */;
 			projectDirPath = "";
@@ -569,6 +578,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		ED40A70A2D65BDBF00EB7BC5 /* XCRemoteSwiftPackageReference "Charts" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ChartsOrg/Charts.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.1.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		ED40A70B2D65BDBF00EB7BC5 /* DGCharts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = ED40A70A2D65BDBF00EB7BC5 /* XCRemoteSwiftPackageReference "Charts" */;
+			productName = DGCharts;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = ED98CECB2D536CAD0073779C /* Project object */;
 }

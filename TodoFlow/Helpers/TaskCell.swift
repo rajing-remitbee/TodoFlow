@@ -15,6 +15,8 @@ class TaskCell: UITableViewCell {
     @IBOutlet var taskLabel: UILabel! //TaskLabel
     @IBOutlet var categoryBox: UILabel! //Category Box
     @IBOutlet var categoryLabel: UILabel! //Category Label
+    
+    var indexPath: IndexPath?
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -33,7 +35,9 @@ class TaskCell: UITableViewCell {
         categoryBox?.clipsToBounds = true
     }
     
-    func configure(with task: TaskModel) {
+    func configure(with task: TaskModel, index: IndexPath) {
+        //Configure indexPath
+        indexPath = index
         //Configure task and category label
         taskLabel.text = task.title
         categoryLabel.text = "  \(task.category.name)  "
@@ -52,30 +56,9 @@ class TaskCell: UITableViewCell {
             taskLabel.attributedText = NSAttributedString(string: task.title)
         }
     }
-    
-    func findIndexPath() -> IndexPath? {
-        var view = superview
-        while let parent = view, !(parent is UITableView) {
-            view = parent.superview
-        }
-        guard let tableView = view as? UITableView else { return nil }
-        return tableView.indexPath(for: self)
-    }
         
     @IBAction func checkBoxTapped(_ sender: UIButton) {
-        sender.isSelected.toggle() // Toggle checkbox state
-        // Change tint color dynamically
-        sender.tintColor = sender.isSelected ? UIColor(hex: "#00A86B") : UIColor(hex: "#F4F6F6")
-        
-        if sender.isSelected {
-            let attributeString = NSMutableAttributedString(string: taskLabel.text ?? "")
-            attributeString.addAttribute(.strikethroughStyle, value: NSUnderlineStyle.single.rawValue, range: NSRange(location: 0, length: taskLabel.text?.count ?? 0))
-            taskLabel.attributedText = attributeString
-        } else {
-            taskLabel.attributedText = NSAttributedString(string: taskLabel.text ?? "")
-        }
-        
-        if let indexPath = findIndexPath() {
+        if let indexPath = self.indexPath {
             delegate?.toggleTaskCompletion(at: indexPath)
         }
     }

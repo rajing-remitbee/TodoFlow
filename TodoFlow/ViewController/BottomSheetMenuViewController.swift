@@ -19,7 +19,8 @@ class BottomSheetMenuViewController: UIViewController, UITableViewDelegate {
     var isAddingNewList = false //Edit Mode
     var selectedCategoryIndex: IndexPath? //Selected Index
     
-    private var initialBottomSheetY: CGFloat = 0 //Initial BottomSheet Height
+    private var initialBottomSheetY: CGFloat = 0 //BottomSheet Height
+    private var defaultBottomSheetY: CGFloat = 0; //Default BottomSheet Height
     
     override func viewDidLoad() {
         super.viewDidLoad()

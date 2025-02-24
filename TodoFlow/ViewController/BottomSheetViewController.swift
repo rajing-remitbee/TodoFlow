@@ -18,13 +18,16 @@ class BottomSheetViewController: UIViewController {
     
     weak var bottomSheetDelegate: BottomSheetDelegate? //Delegate for BottomSheet
     
-    private var initialBottomSheetY: CGFloat = 0 //Initial BottomSheet Height
+    private var initialBottomSheetY: CGFloat = 0 //BottomSheet Height
+    private var defaultBottomSheetY: CGFloat = 0 //Default BottomSheet Height
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         //Semi-Transparent Background
         self.view.backgroundColor = UIColor.black.withAlphaComponent(0.4)
+        
+        defaultBottomSheetY = bottomSheetView.frame.origin.y;
         
         setUpBottomSheet()
         setupKeyboardObservers()
@@ -217,7 +220,7 @@ class BottomSheetViewController: UIViewController {
             //Changed BottomSheet State
         case .changed:
             let newY = initialBottomSheetY + translation.y
-            if newY >= initialBottomSheetY {
+            if newY >= defaultBottomSheetY {
                 // Prevent moving up beyond original position
                 bottomSheetView.frame.origin.y = newY
             }
